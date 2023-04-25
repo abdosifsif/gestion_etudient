@@ -1,0 +1,46 @@
+CREATE TABLE `demande` (
+  `iddemande` int(11) NOT NULL AUTO_INCREMENT,
+  `idetud` int(11) DEFAULT NULL,
+  `datedemande` date DEFAULT NULL,
+  `modulesdemandees` varchar(255) DEFAULT NULL,
+  `file_releve` varchar(255) DEFAULT NULL,
+  `file_carte` varchar(255) DEFAULT NULL,
+  `iduser` int(11) DEFAULT NULL,
+  `reponseadmin` tinyint(1) DEFAULT NULL,
+  `datereponse` datetime DEFAULT NULL,
+  PRIMARY KEY (`iddemande`),
+  KEY `iduser` (`iduser`),
+  KEY `idetud` (`idetud`),
+  CONSTRAINT `demande_ibfk_1` FOREIGN KEY (`iduser`) REFERENCES `utilisateur` (`iduser`),
+  CONSTRAINT `demande_ibfk_2` FOREIGN KEY (`idetud`) REFERENCES `etudiant` (`idetud`)
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4
+
+CREATE TABLE `etudiant` (
+  `idetud` int(11) NOT NULL AUTO_INCREMENT,
+  `apogee` varchar(255) NOT NULL,
+  `nom` varchar(255) NOT NULL,
+  `prenom` varchar(255) NOT NULL,
+  `datenaissance` date NOT NULL,
+  `statut` varchar(255) NOT NULL,
+  `filiere` varchar(255) NOT NULL,
+  PRIMARY KEY (`idetud`)
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4
+
+CREATE TABLE `eventuser` (
+  `idevent` int(11) NOT NULL AUTO_INCREMENT,
+  `iduser` int(11) DEFAULT NULL,
+  `dateevent` date DEFAULT NULL,
+  `ipadress` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`idevent`),
+  KEY `iduser` (`iduser`),
+  CONSTRAINT `eventuser_ibfk_1` FOREIGN KEY (`iduser`) REFERENCES `utilisateur` (`iduser`)
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4
+
+CREATE TABLE `utilisateur` (
+  `iduser` int(11) NOT NULL AUTO_INCREMENT,
+  `login` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `profil` varchar(255) NOT NULL,
+  `statut` varchar(255) NOT NULL,
+  PRIMARY KEY (`iduser`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4
